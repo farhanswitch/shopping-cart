@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "tail": "yarn tailwindcss -i ./src/styles/tailwind.css -o ./src/styles/style.css --watch"
   },
   "dependencies": {
     "react": "^18.0.0",

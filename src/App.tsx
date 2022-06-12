@@ -1,45 +1,48 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import "./styles/style.css";
+import { useState } from "react";
+import { useQuery } from "react-query";
+import LinearProgress from "./Components/LinearProgress";
+import Item from "./Components/Item";
+import Drawer from "./Components/Drawer";
+//Types
+export type CartItemType = {
+  id: number;
+  category: string;
+  description: string;
+  image: string;
+  price: number;
+  title: string;
+  amount: number;
+};
+const getProducts = async (): Promise<CartItemType[]> =>
+  await (await fetch("https://fakestoreapi.com/products")).json();
+const App: React.FC = () => {
+  const { data, isLoading, error } = useQuery<CartItemType[]>(
+    "products",
+    getProducts
+  );
+  const getTotalItems = () => null;
+  const handleAddToCart = (clickedItem: CartItemType) => null;
+  const handleRemoveToCart = () => null;
+  console.log(data);
 
-function App() {
-  const [count, setCount] = useState(0)
-
+  if (isLoading) return <LinearProgress />;
+  if (error) return <div>Something went wrong ... </div>;
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
+      <Drawer />
+      <div className="grid-container grid gap-4 grid-cols-1 sm:grid-cols-3 px-6">
+        {data?.map((item) => (
+          <div
+            key={item.id}
+            className="flex flex-column justify-between w-full h-full border border-stone-300 rounded-[20px]"
           >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+            <Item item={item} handleAddToCart={handleAddToCart} />
+          </div>
+        ))}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
