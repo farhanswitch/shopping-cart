@@ -10,7 +10,7 @@ module.exports = {
         },
       },
       animation: {
-        "linear-progress": "linearP .3s ease-in-out infinite",
+        "linear-progress": "linearP .7s ease-in-out infinite",
       },
     },
   },
