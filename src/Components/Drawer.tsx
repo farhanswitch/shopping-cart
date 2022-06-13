@@ -1,6 +1,13 @@
-const Drawer: React.FC = () => {
+type Props = {
+  isOpen: boolean;
+};
+const Drawer: React.FC<Props> = ({ isOpen }) => {
   return (
-    <div className="fixed w-1/2 h-screen z-[99] right-0 bg-stone-800/50 backdrop-blur-md hidden">
+    <div
+      className={`${
+        isOpen ? "fixed" : "hidden"
+      } w-1/2 h-[90vh] z-[99] right-0 bg-stone-800/50 backdrop-blur-md `}
+    >
       <h3>Drawer</h3>
       <p>Cek</p>
     </div>

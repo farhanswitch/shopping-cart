@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import LinearProgress from "./Components/LinearProgress";
 import Item from "./Components/Item";
 import Drawer from "./Components/Drawer";
+import Nav from "./Components/Nav";
 //Types
 export type CartItemType = {
   id: number;
@@ -21,7 +22,12 @@ const App: React.FC = () => {
     "products",
     getProducts
   );
-  const getTotalItems = () => null;
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [cartItems, setCartItems] = useState<[] | CartItemType[]>([]);
+  const handleOpenDrawer = () => setIsOpen(!isOpen);
+  const getTotalItems = (items: CartItemType[]) =>
+    items.reduce((acc: number, item) => acc + item.amount, 0);
+  const getTotal = getTotalItems(cartItems);
   const handleAddToCart = (clickedItem: CartItemType) => null;
   const handleRemoveToCart = () => null;
   console.log(data);
@@ -30,7 +36,8 @@ const App: React.FC = () => {
   if (error) return <div>Something went wrong ... </div>;
   return (
     <div className="App">
-      <Drawer />
+      <Nav handleClick={handleOpenDrawer} total={getTotal} />
+      <Drawer isOpen={isOpen} />
       <div className="grid-container grid gap-4 grid-cols-1 sm:grid-cols-3 px-6">
         {data?.map((item) => (
           <div
