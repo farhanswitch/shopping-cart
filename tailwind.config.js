@@ -12,6 +12,9 @@ module.exports = {
       animation: {
         "linear-progress": "linearP .7s ease-in-out infinite",
       },
+      fontFamily: {
+        inter: "inter",
+      },
     },
   },
   plugins: [],

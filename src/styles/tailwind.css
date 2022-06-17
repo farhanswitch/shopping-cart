@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind  componennts;
 @tailwind  utilities;
+
+@font-face{
+font-family: 'inter';
+src: url('../../inter.ttf');
+}

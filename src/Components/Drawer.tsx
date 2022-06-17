@@ -1,15 +1,15 @@
 type Props = {
   isOpen: boolean;
+  children: JSX.Element;
 };
-const Drawer: React.FC<Props> = ({ isOpen }) => {
+const Drawer: React.FC<Props> = ({ isOpen, children }) => {
   return (
     <div
       className={`${
         isOpen ? "fixed" : "hidden"
-      } w-1/2 h-[90vh] z-[99] right-0 bg-stone-800/50 backdrop-blur-md `}
+      } w-screen md:w-1/2 h-[90vh] overflow-auto z-[99] right-0 bg-stone-300/90 backdrop-blur-lg `}
     >
-      <h3>Drawer</h3>
-      <p>Cek</p>
+      {children}
     </div>
   );
 };
